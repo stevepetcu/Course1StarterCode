@@ -85,9 +85,8 @@ public class EarthquakeCityMap extends PApplet {
         // The List you will populate with new SimplePointMarkers
         List<Marker> markers = new ArrayList<Marker>();
 
-        int numberOfEarthquakes = earthquakes.size();
-        for (int i = 0; i < numberOfEarthquakes; i++) {
-            markers.add(this.createMarker(earthquakes.get(i)));
+        for (PointFeature earthquake : earthquakes) {
+            markers.add(this.createMarker(earthquake));
         }
 
         // Add the markers to the map so that they are displayed
