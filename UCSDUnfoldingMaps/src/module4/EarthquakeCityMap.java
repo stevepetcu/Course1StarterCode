@@ -80,8 +80,8 @@ public class EarthquakeCityMap extends PApplet {
 
         // FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
         // one of the lines below.  This will work whether you are online or offline
-        //earthquakesURL = "test1.atom";
-        //earthquakesURL = "test2.atom";
+//        earthquakesURL = "test1.atom";
+//        earthquakesURL = "test2.atom";
 
         // WHEN TAKING THIS QUIZ: Uncomment the next line
         //earthquakesURL = "quiz1.atom";
@@ -212,16 +212,17 @@ public class EarthquakeCityMap extends PApplet {
         //      property set.  You can get the country with:
         //        String country = (String)m.getProperty("country");
         HashMap<String, Integer> quakeMap = new HashMap<String, Integer>();
+        String quakeCountry;
 
         for (Marker marker : quakeMarkers) {
-            if (marker instanceof LandQuakeMarker) {
-                Integer quakeCounter = quakeMap.getOrDefault(((LandQuakeMarker) marker).getCountry(), 0);
-                quakeMap.put(((LandQuakeMarker) marker).getCountry(), ++quakeCounter);
-            }
+            quakeCountry = ((EarthquakeMarker)marker).getCountry();
+
+            Integer quakeCounter = quakeMap.getOrDefault(quakeCountry, 0);
+            quakeMap.put(quakeCountry, ++quakeCounter);
         }
 
         for (HashMap.Entry<String, Integer> quake : quakeMap.entrySet()) {
-            System.out.print(quake.getKey() + ":" + quake.getValue() + "\n");
+            System.out.print(quake.getKey() + ": " + quake.getValue() + "\n");
         }
     }
 

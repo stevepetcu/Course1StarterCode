@@ -32,9 +32,9 @@ public class OceanQuakeMarker extends EarthquakeMarker {
 		// TODO: Implement this method
 		
 	}
-	
 
-
-	
-
+	// Get the country the earthquake is in
+	public String getCountry() {
+		return "Ocean";
+	}
 }

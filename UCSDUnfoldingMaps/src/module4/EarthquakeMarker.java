@@ -41,8 +41,9 @@ public abstract class EarthquakeMarker extends SimplePointMarker
 	
 	// abstract method implemented in derived classes
 	public abstract void drawEarthquake(PGraphics pg, float x, float y);
-		
-	
+
+	public abstract String getCountry();
+
 	// constructor
 	public EarthquakeMarker (PointFeature feature) 
 	{
