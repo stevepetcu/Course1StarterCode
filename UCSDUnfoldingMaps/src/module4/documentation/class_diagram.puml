@@ -1,0 +1,134 @@
+@startuml
+
+'class_definitions'
+    interface Marker {
+        + {abstract} String getId()
+        + {abstract} void setId(String var1)
+        + {abstract} Location getLocation()
+        + {abstract} void setLocation(float var1, float var2)
+        + {abstract} void setLocation(Location var1)
+        + {abstract} double getDistanceTo(Location var1)
+        + {abstract} void setProperties(HashMap<String, Object> var1)
+        + {abstract} Object setProperty(String var1, Object var2)
+        + {abstract} HashMap<String, Object> getProperties()
+        + {abstract} Object getProperty(String var1)
+        + {abstract} String getStringProperty(String var1)
+        + {abstract} Integer getIntegerProperty(String var1)
+        + {abstract} boolean isInside(UnfoldingMap var1, float var2, float var3)
+        + {abstract} void draw(UnfoldingMap var1)
+        + {abstract} void setSelected(boolean var1)
+        + {abstract} boolean isSelected()
+        + {abstract} void setHidden(boolean var1)
+        + {abstract} boolean isHidden()
+        + {abstract} void setColor(int var1)
+        + {abstract} void setStrokeColor(int var1)
+        + {abstract} void setStrokeWeight(int var1)
+    }
+
+    abstract class AbstractMarker {
+        # int color
+        # int strokeColor
+        # int strokeWeight
+        # int highlightColor
+        # int highlightStrokeColor
+        # Location location
+        # HashMap<String, Object> properties
+        # boolean selected
+        # boolean hidden
+        # String id
+        + {abstract} AbstractMarker()
+        + {abstract} AbstractMarker(Location var1)
+        + {abstract} AbstractMarker(Location var1, HashMap<String, Object> var2)
+        + {abstract} abstract void draw(PGraphics var1, float var2, float var3)
+        # {abstract} abstract boolean isInside(float var1, float var2, float var3, float var4)
+        + String getId()
+        + void setId(String var1)
+        + void setProperties(HashMap<String, Object> var1)
+        + Object setProperty(String var1, Object var2)
+        + HashMap<String, Object> getProperties()
+        + Object getProperty(String var1)
+        + String getStringProperty(String var1)
+        + Integer getIntegerProperty(String var1)
+        + void draw(UnfoldingMap var1)
+        + boolean isInside(UnfoldingMap var1, float var2, float var3)
+        + ScreenPosition getScreenPosition(UnfoldingMap var1)
+        + Location getLocation()
+        + void setLocation(Location var1)
+        + void setLocation(float var1, float var2)
+        + double getDistanceTo(Location var1)
+        + void setSelected(boolean var1)
+        + boolean isSelected()
+        + void setHidden(boolean var1)
+        + boolean isHidden()
+        + void setColor(int var1)
+        + void setStrokeWeight(int var1)
+        + void setHighlightColor(int var1)
+        + void setHighlightStrokeColor(int var1)
+        + void setStrokeColor(int var1)
+        # void draw(PGraphics var1, float var2, float var3, UnfoldingMap var4)
+    }
+
+    class SimplePointMarker {
+        # float radius
+        + SimplePointMarker()
+        + SimplePointMarker(Location var1)
+        + SimplePointMarker(Location var1, HashMap<String, Object> var2)
+        + void draw(PGraphics var1, float var2, float var3)
+        + boolean isInside(float var1, float var2, float var3, float var4)
+        + void setRadius(float var1)
+    }
+
+    abstract class EarthquakeMarker {
+        + {static} final float THRESHOLD_MODERATE
+        + {static} final float THRESHOLD_LIGHT
+        + {static} final float THRESHOLD_INTERMEDIATE
+        + {static} final float THRESHOLD_DEEP
+        # boolean isOnLand;
+        + EarthquakeMarker (PointFeature feature)
+        + {abstract} void drawEarthquake(PGraphics pg, float x, float y);
+        + {abstract} String getCountry();
+        + void draw(PGraphics pg, float x, float y)
+        + float getMagnitude()
+        + float getDepth()
+        + String getTitle()
+        + float getRadius()
+        + boolean isOnLand()
+        - void colorDetermine(PGraphics pg)
+    }
+
+    class LandQuakeMarker {
+        + LandQuakeMarker(PointFeature quake)
+        + void @Override drawEarthquake(PGraphics pg, float x, float y)
+        + String getCountry()
+    }
+
+    class OceanQuakeMarker {
+        + OceanQuakeMarker(PointFeature quake)
+        + void @Override drawEarthquake(PGraphics pg, float x, float y)
+        + String getCountry()
+    }
+
+    class CityMarker {
+            + {static} final int TRI_SIZE
+            + CityMarker(Location location)
+            + CityMarker(Feature city)
+            + void draw(PGraphics pg, float x, float y)
+            + String getCity()
+            + String getCountry()
+            + float getPopulation()
+    }
+'/class_definitions'
+
+'class_relationships'
+    Marker <|-right- AbstractMarker
+
+    AbstractMarker <|-- SimplePointMarker
+
+    SimplePointMarker <|-- EarthquakeMarker
+    SimplePointMarker <|-- CityMarker
+
+    EarthquakeMarker <|-- LandQuakeMarker
+    EarthquakeMarker <|-- OceanQuakeMarker
+'/class_relationships'
+
+@enduml
