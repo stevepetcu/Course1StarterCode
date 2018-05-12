@@ -83,10 +83,11 @@
         + {static} final float THRESHOLD_LIGHT
         + {static} final float THRESHOLD_INTERMEDIATE
         + {static} final float THRESHOLD_DEEP
-        # boolean isOnLand;
+        # boolean isOnLand
         + EarthquakeMarker (PointFeature feature)
-        + {abstract} void drawEarthquake(PGraphics pg, float x, float y);
-        + {abstract} String getCountry();
+        + {abstract} void drawShape(float x, float y, float sideSize, PGraphics pg)
+        + {abstract} String getCountry()
+        + void drawEarthquake(PGraphics pg, float x, float y)
         + void draw(PGraphics pg, float x, float y)
         + float getMagnitude()
         + float getDepth()
@@ -98,13 +99,13 @@
 
     class LandQuakeMarker {
         + LandQuakeMarker(PointFeature quake)
-        + void @Override drawEarthquake(PGraphics pg, float x, float y)
+        + void @Override drawShape(float x, float y, float sideSize, PGraphics pg)
         + String getCountry()
     }
 
     class OceanQuakeMarker {
         + OceanQuakeMarker(PointFeature quake)
-        + void @Override drawEarthquake(PGraphics pg, float x, float y)
+        + void @Override drawShape(float x, float y, float sideSize, PGraphics pg)
         + String getCountry()
     }
 
